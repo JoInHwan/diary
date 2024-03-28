@@ -3,12 +3,10 @@
 <%@ page import = "java.net.*" %>
 <%@ include file="loginConfirm.jsp" %>
 
-<% 	
-	int currentPage = 1 ;
+<% 	int currentPage = 1 ;
 	if(request.getParameter("currentPage")!=null){
 		currentPage = Integer.parseInt(request.getParameter("currentPage"));
-	}
-	
+	}	
 	int rowPerPage = 10;
 	
 	String want = request.getParameter("want");
@@ -27,8 +25,7 @@
 	String searchWord = "";
 	if(request.getParameter("searchWord")!=null){
 		searchWord = request.getParameter("searchWord");
-	}
-	
+	}	
 	String sql = "select diary_date diaryDate,title,content from diary where title like ? order by diary_date asc limit ?,?";
 	PreparedStatement stmt = null;
 	ResultSet rs = null;
