@@ -14,7 +14,7 @@
 	<title>홈 화면</title>
 </head>
 <body class="container " >
-	<nav class="navbar navbar-expand-lg" style="background-color: #e3f2fd;" >
+	<nav class="navbar navbar-expand-lg" style="background-color: #98FB98;" >
   <div class="container-fluid">  
    <a class="navbar-brand" href="/diary/diary.jsp">Home</a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -30,19 +30,19 @@
           <a class="nav-link active" aria-current="page" href="/diary/lunch/lunchList.jsp">점심메뉴</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="/diary/addDiaryForm.jsp">일기작성</a>
+          <a class="nav-link" href="/diary/lunch/addLunchForm.jsp">메뉴추가</a>
         </li>       
         
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            글 개수
+            항목개수
           </a>
           <ul class="dropdown-menu">  
-            <li><a class="dropdown-item" href="/diary/diary.jsp?perPage=1">1개씩</a></li>     
-            <li><a class="dropdown-item" href="/diary/diary.jsp?perPage=5">5개씩</a></li>
-            <li><a class="dropdown-item" href="/diary/diary.jsp?perPage=7">7개씩</a></li>
-            <li><a class="dropdown-item" href="/diary/diary.jsp?perPage=10">10개씩</a></li>
-            <li><a class="dropdown-item" href="/diary/diary.jsp?perPage=15">15개씩</a></li>
+            <li><a class="dropdown-item" href="/diary/lunch/lunchList.jsp?perPage=1">1개씩</a></li>     
+            <li><a class="dropdown-item" href="/diary/lunch/lunchList.jsp?perPage=5">5개씩</a></li>
+            <li><a class="dropdown-item" href="/diary/lunch/lunchList.jsp?perPage=7">7개씩</a></li>
+            <li><a class="dropdown-item" href="/diary/lunch/lunchList.jsp?perPage=10">10개씩</a></li>
+            <li><a class="dropdown-item" href="/diary/lunch/lunchList.jsp?perPage=15">15개씩</a></li>
             <li><hr class="dropdown-divider"></li>
             <li><a class="dropdown-item" href="#">Something else here</a></li>
           </ul>
@@ -51,8 +51,8 @@
 <!--           <a class="nav-link disabled" aria-disabled="true">Disabled</a> -->
 <!--         </li> -->
       </ul>
-      <form class="d-flex" role="search" method="get" action="/diary/diary.jsp" >
-        <input class="form-control me-2" name="searchWord" type="search" placeholder="제목검색" aria-label="Search">
+      <form class="d-flex" role="search" method="get" action="/diary/lunch/lunchList.jsp" >
+        <input class="form-control me-2" name="searchWord" type="search" placeholder="메뉴검색" aria-label="Search">
         <button class="btn btn-outline-success" type="submit">Search</button>
       </form>
     </div>

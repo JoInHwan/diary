@@ -1,19 +1,17 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ page import = "java.sql.*" %>
-<%@ include file="loginConfirm.jsp" %>
-
+<%@ include file="loginConfirm.jsp" %>	
 <%	
-	String diaryDate = request.getParameter("diaryDate");
-	System.out.println(diaryDate + "<-diaryDate");	
+	String lunch_Date = request.getParameter("lunch_Date");
+	System.out.println(lunch_Date + "<-lunch_Date");	
 
 	// 해당 일기 삭제
-		String sql = "delete from diary where diary_date = ?";
+		String sql = "delete from lunch where lunch_Date = ?";
 		PreparedStatement stmt = null;	
 		stmt = conn.prepareStatement(sql);
-		stmt.setString(1,diaryDate);
+		stmt.setString(1,lunch_Date);
 		
 		int row= stmt.executeUpdate();
 		System.out.println(row + "<-row");			
 		
-		response.sendRedirect("/diary/calendarDiary.jsp");	
+		response.sendRedirect("/diary/lunch/lunchList.jsp");	
 %>

@@ -1,6 +1,4 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ page import = "java.sql.*" %>
-<%@ page import = "java.net.*" %>
 <%@ include file="loginConfirm.jsp" %>
 
 <% 	int currentPage = 1 ;
@@ -9,14 +7,14 @@
 	}	
 	int rowPerPage = 10;
 	
-	String want = request.getParameter("want");
+	String perPage = request.getParameter("perPage");
 	
-	System.out.println(want+ "<-want");
-	if(want == null || want.equals("null")) {
+	System.out.println(perPage+ "<-perPage");
+	if(perPage == null || perPage.equals("null")) {
 	    rowPerPage = 10;
 	    System.out.println(rowPerPage + "널일때");
 	} else {
-	    rowPerPage = Integer.parseInt(want);
+	    rowPerPage = Integer.parseInt(perPage);
 	    System.out.println(rowPerPage + "<-rowPerPage");
 	}	
 		
@@ -59,13 +57,7 @@
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css2?family=Song Myung&display=swap" rel="stylesheet">
 <link href="/diary/diaryButton.css" rel="stylesheet">
-	<style>
-	button {
-		border: none;
-		border-radius: 6px;
-		padding: 4px 4px;
-		font-size: 12px;
-	}		
+	<style>		
 	.index  {
 			
 		font-weight: bold;	
@@ -74,7 +66,7 @@
 	td {
 		text-align: center;
 	}
-	.box:link, a:visited {
+	.box:link, .box:visited{
 	  color: black;
 	  padding: 12px 25px;
 	  text-align: center;
@@ -121,10 +113,10 @@
 					if(currentPage > 1) {
 				%>
 						<li class="page-item">
-							<a class ="page-link" href="/diary/diary.jsp?currentPage=1&want=<%=want%>">처음페이지</a>
+							<a class ="page-link" href="/diary/diary.jsp?currentPage=1&perPage=<%=perPage%>">처음페이지</a>
 						</li>
 						<li class="page-item">
-							<a class ="page-link" href="/diary/diary.jsp?currentPage=<%=currentPage-1%>&want=<%=want%>">이전페이지</a>
+							<a class ="page-link" href="/diary/diary.jsp?currentPage=<%=currentPage-1%>&perPage=<%=perPage%>">이전페이지</a>
 						</li>																
 				<%		
 					} else {
@@ -134,14 +126,14 @@
 						</li>
 					
 						<li class="page-item disabled">
-							<a class ="page-link" href="/diary/diary.jsp?currentPage=<%=currentPage-1%>&want=<%=want%>">이전페이지</a>
+							<a class ="page-link" href="/diary/diary.jsp?currentPage=<%=currentPage-1%>&perPage=<%=perPage%>">이전페이지</a>
 						</li>
 				<%		
 					}				
 					if(currentPage < lastPage || lastPage == 0  ) {
 				%>
 						<li class="page-item">
-							<a class ="page-link" href="/diary/diary.jsp?currentPage=<%=currentPage+1%>&want=<%=want%>">다음페이지</a>
+							<a class ="page-link" href="/diary/diary.jsp?currentPage=<%=currentPage+1%>&perPage=<%=perPage%>">다음페이지</a>
 						</li>
 						<li class="page-item">
 							<a class ="page-link" href="/diary/diary.jsp?currentPage=<%=lastPage%>">마지막페이지</a>

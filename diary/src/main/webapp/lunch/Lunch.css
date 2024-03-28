@@ -1,0 +1,53 @@
+@charset "UTF-8";
+	.bg {
+			background-size: 100%;
+			background-image: url(/diary/sk.jpg);
+			background-attachment: fixed;
+		}
+
+	.head {
+		font-family: Song Myung;
+		font-size: 40px;
+	}
+	
+	.back {
+		color: black;
+		text-decoration: none;
+		position: absolute;
+		left: 1%;
+		top: 1%;
+		font-size: 20px		
+	}
+	
+	.align-p {
+		position: relative;
+	}
+	
+	.logoutButton {
+	
+		display: inline-block;
+		text-decoration: none;
+		text-align: center;
+		border: none;
+		border-radius: 6px;
+		padding:4px 4px;	
+		font-size: 12px;
+		background-color: #DCDCDC;
+		font-size: 10px;
+		color: black;
+		width: 50px;
+		
+		position: absolute;
+		right: 3%;
+		top: 3%;
+	}
+	
+	.logoutButton:hover {
+		background-color: #e7e7e7;
+		color: black;		
+	}
+	
+	a{
+	text-decoration: none;
+	display:block;
+	}
