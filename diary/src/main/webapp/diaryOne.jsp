@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ page import = "java.sql.*" %>
 <%@ include file="loginConfirm.jsp" %>
 <%		
 	
@@ -10,7 +9,7 @@
 	
 	PreparedStatement stmt = conn.prepareStatement(sql);
 	stmt.setString(1,diaryDate);
-	System.out.println(stmt);
+	//System.out.println(stmt);
 	ResultSet rs= stmt.executeQuery(); 
 	
 %>  
@@ -38,7 +37,7 @@
 	  text-align: center;	 
 	  
 	}
-		
+
 	</style>
 </head>
 <body class="container bg">
@@ -63,9 +62,14 @@
 			 	<tr><td class="index">수정날짜</td><td class="box"><%=rs.getString("update_date")%></td></tr>
 			 	<tr><td class="index">처음작성날짜</td><td class="box"><%=rs.getString("create_date")%></td></tr>						
 			</table>
-									
-			<a href="/diary/updateDiaryForm.jsp?diaryDate=<%=rs.getString("diary_date")%>" class="btn btn-outline-warning">일기수정</a>
-			<a href="/diary/deleteDiaryAction.jsp?diaryDate=<%=rs.getString("diary_date")%>" class="btn btn-outline-warning">일기삭제</a>
+			<div style="display: flex; flex-direction: row;justify-content: flex-end;">	
+			
+				<div>				
+					<a href="/diary/updateDiaryForm.jsp?diaryDate=<%=rs.getString("diary_date")%>" class="btn btn-outline-warning">일기수정</a>
+					<a href="/diary/deleteDiaryAction.jsp?diaryDate=<%=rs.getString("diary_date")%>" class="btn btn-outline-warning">일기삭제</a>
+				</div>
+			
+			</div>	
 		<%
 		} else{
 		%>
@@ -73,6 +77,46 @@
 		<%	}
 		
 		%>
+		<h5>댓글</h5>
+		<div>
+		<form method="post" class="form-control" action="/diary/addCommentAction.jsp"  style="display: flex; flex-direction: column;">
+				<input type="hidden" name="diaryDate" value="<%=diaryDate%>">
+				
+				<textarea name="memo" class="form-control" placeholder="댓글을 입력해주세요" rows="3" ></textarea><br>
+				<button class="btn btn-outline-info align-self-end" type="submit">댓글등록</button>
+		</form>
+		
+		</div> <br>	
+		
+		<%
+			String sql2 = "select * from comment where diary_date = ?";
+			PreparedStatement stmt2 = null;
+			ResultSet rs2 = null;
+			
+			stmt2 = conn.prepareStatement(sql2);
+			stmt2.setString(1,diaryDate);
+			rs2 = stmt2.executeQuery();		
+		%>
+			<table class="table table-hover ">
+					<tr>								
+						<th colspan="3" style="background-color: #A9A9A9">댓글</th>								
+					</tr>
+				<%
+					while(rs2.next()){
+				%>
+					<tr>
+						<td colspan="2"><%=rs2.getString("memo") %></td>
+						<td style="text-align: right; font-size:12px;"><%=rs2.getString("create_date") %>
+						<a href="/diary/deleteComment.jsp?comment_num=<%=rs2.getString("comment_num")%>
+						&diary_date=<%=rs2.getString("diary_date")%>"> 삭제 </a></td>
+						 
+					</tr>		
+				<%
+					}
+				%>
+			
+			</table>
+		
 	</div>	
 			<div class="col"></div>	
 		</div>

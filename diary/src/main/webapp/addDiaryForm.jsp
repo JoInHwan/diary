@@ -105,8 +105,6 @@
 			<div class="mb-3 mt-3"><textarea class="form-control" rows="7" cols="50" name="content"></textarea></div>			
 			
 			
-			
-			
 			<div><button type="submit">입력</button></div>
 					
 		</form>
