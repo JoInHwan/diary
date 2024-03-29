@@ -1,39 +1,22 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ page import = "java.sql.*" %>
+<%=session.getId()%>
 <%
-	// 0. 로그인(인증) 분기
-	// diary데이터베이스	login테이블my_session컬럼 => ON -> redirect("diary.jsp")
-
-	String sql1 = null;
-	sql1="select my_session as mySession from login";
+	//0-1) 로그인(인증) 분기 session사용으로 변경
+	// 로그인 성공시 세션에 loginMember라는 변수를 만들고 값으로 로그인 아이디를 저장
+	// 사용되는 Ssssion API
 	
-	Class.forName("org.mariadb.jdbc.Driver");
-	Connection conn = null; 
-	PreparedStatement stmt1 = null; 
-	ResultSet rs1 = null;	
+	String loginMember = (String)session.getAttribute("loginMember"); // session.getAttibute(String) : 변수이름으로 변수값을 반환하는 메서드	
+			
+	// session.getAttibute() 찾는 변수가 없으면 null 값을 반환한다 	
+	System.out.println(loginMember + "<-loginMember1");	// null이면 로그아웃상태이고, null이아니면 로그인 상태
+	// loginForm페이지는 로그아웃상태에서만 출력되는 페이지
 	
-	conn= DriverManager.getConnection("jdbc:mariadb://127.0.0.1:3306/diary","root","0901");
-	stmt1=conn.prepareStatement(sql1);
-	rs1 = stmt1.executeQuery();
 	
-	String mySession = null; //변수 생성
-	if(rs1.next()){  // diary데이터베이스 출력
-		mySession = rs1.getString("mySession"); // string 안을 "1"로 대체 가능(첫번째컬럼을 가져옴)		
-	}
-	if(mySession.equals("ON")){   // 로그인 상태가 ON이라면
-		
-		
-		response.sendRedirect("/diary/diary.jsp"); // 자동으로 로그인페이지로 넘어감
-		//자원반납
-		rs1.close();
-		stmt1.close();
-		conn.close();
-		return;  // redirect와 달리 아예 코드 진행을 끝냄
-	}
-	rs1.close();
-	stmt1.close();
-	conn.close();
 	
+	if(loginMember != null) {  // 세션값이 '있다면' 즉 로그인이 되어있다면
+		response.sendRedirect("/diary/diary.jsp");
+		return; // 코드 진행을 끝내는 문법 ex) 메서드 끝낼때 return사용
+	}		
 	//1. 요청값분석
 	String errMsg = request.getParameter("errMsg");	 //에러메시지 값을 이후 페이지로 부터 받아옴	
 	
@@ -44,6 +27,7 @@
 <head>
 <link href="https://fonts.googleapis.com/css2?family=Song Myung&display=swap" rel="stylesheet">
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" >
+
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" ></script>
 	<meta charset="UTF-8">
 	<title>로그인 화면</title>
@@ -59,12 +43,12 @@
 		background-attachment: fixed;
 	}
 	
-	.temp {
+	.loginPage {
 		margin-top: 250px;
 		height: 400px;
 	}
 	
-	button {
+	.loginButton {
 		text-align: center;
 		border: none;
 		text-decoration: none;
@@ -76,7 +60,7 @@
 		width: 50%;
 	}
 	
-	button:hover {
+	.loginButton:hover {
 		background-color: #e7e7e7;
 		color: black;
 	}
@@ -96,12 +80,13 @@
 	.error {
 		background-color: rgba(255, 30, 20, 0.8);
 		border-radius: 4px;
-		position: absolute;
-		left: 50%;
-		right: 50%;
-		transform: translate(-50%, -50%);
-		top: 385px;
-		width: 15%;
+/* 		height:20px; */
+/* 		position: absolute; */
+/* 		left: 50%; */
+/* 		right: 50%; */
+/* 		transform: translate(-50%, -50%); */
+/* 		top: 385px; */
+/*  	width: 10%;  */
 	}
 	
 	.info {
@@ -115,7 +100,7 @@
 		<div class="row">
 			<div class="col"></div>
 		
-				<div class="temp col-7 border shadow p-3 bg-body-tertiary rounded">		
+				<div class="loginPage col-7 border shadow p-3 bg-body-tertiary rounded">		
 					
 					<div class="head mb-3">My Diary</div> 	
 					<div class="info">로그인 후 이용하실 수 있습니다</div>		
@@ -127,7 +112,7 @@
 					<%
 							}
 					%>		
-				</div><br>
+					</div><br>
 		 					
 		<form action="/diary/loginAction.jsp"> 	
 		<div class="opacity-100"></div>	
@@ -135,7 +120,7 @@
 		<div></div>	 
 		<div><input type="text" name="memberPw" placeholder="비밀번호"></div>				
 				
-		<div><button type="submit">로그인</button></div>	 											
+		<div><button class="loginButton" type="submit">로그인</button></div>	 											
 					
 		</div>		
 							
