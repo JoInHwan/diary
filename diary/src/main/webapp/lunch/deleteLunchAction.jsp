@@ -11,7 +11,7 @@
 	PreparedStatement stmt1 = null;
 	ResultSet rs1 = null;
 	conn = DriverManager.getConnection(
-			"jdbc:mariadb://127.0.0.1:3306/diary", "root", "0901");
+			"jdbc:mariadb://127.0.0.1:3306/diary", "root", "java1234");
 	stmt1 = conn.prepareStatement(sql1);
 	rs1 = stmt1.executeQuery();
 	String mySession = null;

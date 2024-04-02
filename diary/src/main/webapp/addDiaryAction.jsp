@@ -22,7 +22,7 @@
 	int row = 0;	
 	
 	Class.forName("org.mariadb.jdbc.Driver");
-	conn = DriverManager.getConnection("jdbc:mariadb://127.0.0.1:3306/diary","root","0901");
+	conn = DriverManager.getConnection("jdbc:mariadb://127.0.0.1:3306/diary","root","java1234");
 	
 	stmt = conn.prepareStatement(sql);
 	stmt.setString(1,diary_date );

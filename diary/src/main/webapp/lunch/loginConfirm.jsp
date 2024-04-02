@@ -14,6 +14,6 @@
 	
 	Class.forName("org.mariadb.jdbc.Driver");
 	Connection conn = null; 
-	conn= DriverManager.getConnection("jdbc:mariadb://127.0.0.1:3306/diary","root","0901");
+	conn= DriverManager.getConnection("jdbc:mariadb://127.0.0.1:3306/diary","root","java1234");
 	
 %>
